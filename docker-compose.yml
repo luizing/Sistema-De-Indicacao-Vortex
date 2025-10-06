@@ -1,0 +1,16 @@
+version: '3.8'
+
+services:
+  mysql-db:
+    image: mysql:8.0
+    ports:
+      - "3306:3306"
+    environment:
+      MYSQL_DATABASE: vortex_indicacao
+      MYSQL_ROOT_PASSWORD: password
+    volumes:
+      - db-data:/var/lib/mysql
+    container_name: vortex-mysql
+
+volumes:
+  db-data:
