@@ -41,6 +41,7 @@ yarn-debug.log*
 /backend/src/main/resources/*.properties
 /backend/src/main/resources/*.yml
 !/backend/src/main/resources/application.properties # Deixa o arquivo base ser comitado
+/backend/src/main/resources/application-local.properties
 
 ###########################################
 # 2. FRONT-END (VUE / NODE.JS / VITE)
