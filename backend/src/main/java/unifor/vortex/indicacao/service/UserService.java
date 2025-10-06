@@ -49,7 +49,7 @@ public class UserService {
         return UserResponseDTO.fromEntityWithToken(usuarioSalvo, token);
     }
 
-    public UserModel autenticar (String email, String senha){
+    public UserResponseDTO autenticar (String email, String senha){
         Optional<UserModel> userOpt = userRepository.findByEmail(email);
 
         if (userOpt.isEmpty()) {
@@ -58,11 +58,13 @@ public class UserService {
 
         UserModel user = userOpt.get();
 
-        if (passwordEncoder.matches(senha, user.getSenhaHash())) {
-            return user;
-        } else {
+        if (!passwordEncoder.matches(senha, user.getSenhaHash())) {
             return null;
         }
+
+        String token = jwtService.generateToken(user.getId(), user.getEmail());
+
+        return UserResponseDTO.fromEntityWithToken(user, token);
     }
 
     public UserModel buscarPorId(Long id){

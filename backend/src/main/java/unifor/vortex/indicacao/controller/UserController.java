@@ -29,10 +29,10 @@ public class UserController {
     @PostMapping("/login")
     public ResponseEntity<UserResponseDTO> login(@RequestBody UserLoginDTO loginDTO) {
 
-        UserModel user = userService.autenticar(loginDTO.email(), loginDTO.senha());
+        UserResponseDTO responseDTO = userService.autenticar(loginDTO.email(), loginDTO.senha());
 
-        if (user != null) {
-            return ResponseEntity.ok(UserResponseDTO.fromEntity(user));
+        if (responseDTO != null) {
+            return ResponseEntity.ok(responseDTO);
         } else {
             return new ResponseEntity<>(HttpStatus.UNAUTHORIZED);
         }
