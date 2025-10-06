@@ -33,4 +33,8 @@ public class UserModel {
         this.senhaHash = senha; //implementar sistema de Hash
         this.pontuacao = 0;
     }
+
+    public void novoAcesso() {
+        this.pontuacao ++;
+    }
 }
