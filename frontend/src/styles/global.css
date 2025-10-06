@@ -1,0 +1,43 @@
+/* frontend/src/styles/global.css */
+
+/* Definições de cores e fontes para fácil manutenção */
+:root {
+    --primary-color: #007bff;
+    /* Fundo degradê azul escuro - de um azul muito escuro (#0f2027) para um azul escuro/médio (#2c5364) */
+    --background-gradient: linear-gradient(to top, #0f2027, #203a43, #2c5364); 
+    --text-color-light: #f0f0f0; /* Cor de texto clara para fundo escuro */
+    --base-font: 'Arial', sans-serif;
+}
+
+/* Reset Básico de CSS */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box; 
+}
+
+/* Estilos Globais (Aplicados a todo o documento) */
+body, #root {
+    /* O #root é o elemento DOM onde o React renderiza a aplicação */
+    min-height: 100vh;
+    width: 100%;
+    
+    /* APLICA O DEGRADÊ AZUL ESCURO */
+    background: var(--background-gradient); 
+    
+    /* Configura a tipografia básica */
+    font-family: var(--base-font);
+    
+    /* Altera a cor do texto para claro para legibilidade no fundo escuro */
+    color: var(--text-color-light); 
+    
+    overflow-x: hidden; 
+}
+
+/* Estilos de Link Padrão */
+a {
+    text-decoration: none;
+    cursor: pointer;
+    /* Usa a cor primária (azul claro) para links */
+    color: var(--primary-color); 
+}
