@@ -26,4 +26,11 @@ public class UserModel {
     private String senhaHash;
     @Column(nullable = false)
     private int pontuacao;
+
+    public UserModel(String nome, String email, String senha){
+        this.nome = nome;
+        this.email = email;
+        this.senhaHash = senha; //implementar sistema de Hash
+        this.pontuacao = 0;
+    }
 }
