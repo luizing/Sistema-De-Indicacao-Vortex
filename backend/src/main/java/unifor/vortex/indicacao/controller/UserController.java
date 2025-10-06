@@ -1,13 +1,12 @@
 package unifor.vortex.indicacao.controller;
 
-import org.apache.catalina.User;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.HttpStatusCode;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import unifor.vortex.indicacao.dto.UserCadastroDTO;
 import unifor.vortex.indicacao.dto.UserResponseDTO;
 import unifor.vortex.indicacao.model.UserModel;
+import unifor.vortex.indicacao.service.UserService;
 
 @RestController
 @RequestMapping("api/usuarios")
