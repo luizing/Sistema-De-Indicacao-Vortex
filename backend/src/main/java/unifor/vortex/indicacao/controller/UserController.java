@@ -4,6 +4,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import unifor.vortex.indicacao.dto.UserCadastroDTO;
+import unifor.vortex.indicacao.dto.UserLoginDTO;
 import unifor.vortex.indicacao.dto.UserResponseDTO;
 import unifor.vortex.indicacao.model.UserModel;
 import unifor.vortex.indicacao.service.UserService;
@@ -23,6 +24,18 @@ public class UserController {
         UserModel novoUser = userService.cadastrar(cadastroDTO);
 
         return new ResponseEntity<>(UserResponseDTO.fromEntity(novoUser), HttpStatus.CREATED);
+    }
+
+    @PostMapping("/login")
+    public ResponseEntity<UserResponseDTO> login(@RequestBody UserLoginDTO loginDTO) {
+
+        UserModel user = userService.autenticar(loginDTO.email(), loginDTO.senha());
+
+        if (user != null) {
+            return ResponseEntity.ok(UserResponseDTO.fromEntity(user));
+        } else {
+            return new ResponseEntity<>(HttpStatus.UNAUTHORIZED);
+        }
     }
 
     @GetMapping("/{id}")
