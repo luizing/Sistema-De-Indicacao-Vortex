@@ -43,6 +43,22 @@ public class UserService {
         return userRepository.save(novoUser);
     }
 
+    public UserModel autenticar (String email, String senha){
+        Optional<UserModel> userOpt = userRepository.findByEmail(email);
+
+        if (userOpt.isEmpty()) {
+            return null;
+        }
+
+        UserModel user = userOpt.get();
+
+        if (passwordEncoder.matches(senha, user.getSenhaHash())) {
+            return user;
+        } else {
+            return null;
+        }
+    }
+
     public UserModel buscarPorId(Long id){
         return userRepository.findById(id).orElse(null);
     }
