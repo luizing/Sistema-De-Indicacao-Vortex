@@ -1,0 +1,160 @@
+/* Referencia as variáveis globais de cor */
+:root {
+    --primary-color: #007bff;
+    --success-color: #28a745;
+    --text-color-light: #f0f0f0;
+    --shadow-light: 0 2px 8px rgba(0, 0, 0, 0.2);
+}
+
+/* ------------------------------------
+   Layout da Página
+   ------------------------------------ */
+
+.perfil-page {
+    min-height: 100vh; 
+    display: flex;
+    justify-content: center; 
+    align-items: start; 
+    padding: 70px;
+}
+
+.perfil-card {
+    background-color: #ffffff;
+    color: #333; 
+    padding: 40px;
+    border-radius: 12px;
+    box-shadow: var(--shadow-light);
+    width: 100%;
+    max-width: 550px;
+    text-align: center; 
+    box-sizing: border-box;
+}
+
+/* ------------------------------------
+   Blocos de Informação
+   ------------------------------------ */
+
+.welcome-message {
+    font-size: 2rem;
+    color: var(--primary-color);
+    margin-bottom: 30px;
+}
+
+.score-box {
+    background-color: #e9f7ef; 
+    color: var(--success-color);
+    padding: 20px;
+    border-radius: 8px;
+    margin-bottom: 30px;
+    border: 1px solid var(--success-color);
+}
+
+.score-label {
+    font-size: 1rem;
+    font-weight: 600;
+    margin-bottom: 5px;
+}
+
+.score-value {
+    display: block;
+    font-size: 3rem;
+    font-weight: 700;
+    line-height: 1;
+}
+
+.score-unit {
+    font-size: 0.9rem;
+    font-weight: 500;
+    display: block;
+    margin-top: 5px;
+}
+
+.referral-box {
+    margin-bottom: 30px;
+}
+
+.referral-label {
+    font-weight: 600;
+    margin-bottom: 10px;
+    font-size: 0.95rem;
+    color: #555;
+}
+
+.link-group {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+    padding: 10px;
+    border: 1px dashed #ccc;
+    border-radius: 4px;
+    background-color: #f9f9f9;
+}
+
+.referral-link {
+    flex-grow: 1;
+    text-align: left;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    font-size: 0.9rem;
+    color: var(--primary-color);
+    font-weight: 500;
+}
+
+.copy-button {
+    padding: 8px 15px;
+    background-color: var(--primary-color);
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 0.9rem;
+    white-space: nowrap;
+}
+
+.copy-button:hover {
+    background-color: #0056b3;
+}
+
+.logout-button {
+    background-color: #6c757d;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    margin-top: 15px;
+}
+
+.logout-button:hover {
+    background-color: #5a6268;
+}
+
+/* ------------------------------------
+   Responsividade (Mobile First)
+   ------------------------------------ */
+
+@media (max-width: 600px) {
+    .perfil-card {
+        padding: 25px;
+        margin: 10px;
+    }
+    
+    .welcome-message {
+        font-size: 1.5rem;
+    }
+    
+    .link-group {
+        flex-direction: column; 
+    }
+    
+    .referral-link {
+        width: 100%;
+        text-align: center;
+        margin-bottom: 5px;
+    }
+    
+    .copy-button {
+        width: 100%;
+    }
+}
