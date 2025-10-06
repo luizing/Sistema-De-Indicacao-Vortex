@@ -4,15 +4,12 @@ import Perfil from './pages/Perfil';
 import Login from './pages/Login';
 
 const isAuthenticated = () => {
-  // Verifica se o ID do usuário está no localStorage após o login
-  return localStorage.getItem('userId') !== null; 
+  return localStorage.getItem('token') !== null; 
 };
 
-// 2. Componente de Rota Protegida (ProtectedRoute)
 const ProtectedRoute = ({ children }) => {
   if (!isAuthenticated()) {
-    // Redireciona para o cadastro (ou login) se não estiver autenticado
-    return <Navigate to="/cadastro" replace />;
+    return <Navigate to="/login" replace />;
   }
   return children;
 };
@@ -23,13 +20,15 @@ function App() {
      <BrowserRouter>
       <Routes>
         <Route path="/cadastro" element={<Cadastro />} />
-        <Route 
-          path="/perfil" 
-          element={
-              <Perfil />
-          } 
-        />
         <Route path="/login" element={<Login />} />
+        <Route 
+                    path="/perfil" 
+                    element={
+                        <ProtectedRoute>
+                            <Perfil />
+                        </ProtectedRoute>
+                    } 
+                />
         <Route path="*" element={<Navigate to="/login" replace />} />
       </Routes>
     </BrowserRouter>

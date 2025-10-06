@@ -36,6 +36,7 @@ const Login = () => {
       const user = response.data;
       
       localStorage.setItem('userId', user.id); 
+      localStorage.setItem('token', user.token);
       
       navigate('/perfil'); 
 

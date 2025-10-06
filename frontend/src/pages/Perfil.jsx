@@ -12,28 +12,35 @@ const Perfil = () => {
   const navigate = useNavigate();
   
   const userId = localStorage.getItem('userId');
+  const token = localStorage.getItem('token');
   
   useEffect(() => {
-    if (!userId) {
-        navigate('/login', { replace: true });
-        return;
-    }
+    if (!userId || !token) { 
+            navigate('/login', { replace: true });
+            return;
+        }
     
     const fetchUser = async () => {
-      try {
-        const response = await axios.get(`${API_BASE_URL}/api/usuarios/${userId}`);
-        setUser(response.data);
-      } catch (err) {
-        setError('Não foi possível carregar o perfil. ID inválido ou erro de servidor.');
-        console.error("Erro ao carregar perfil:", err);
-        handleLogout(); 
-      } finally {
-        setLoading(false);
-      }
-    };
+            try {
+                const response = await axios.get(
+                    `${API_BASE_URL}/api/usuarios/${userId}`,
+                    {
+                        headers: {
+                            'Authorization': `Bearer ${token}` 
+                        }
+                    }
+                );
+                setUser(response.data);
+            } catch (err) {
+                setError('Sessão expirada ou acesso negado. Faça login novamente.');
+                handleLogout(); 
+            } finally {
+                setLoading(false);
+            }
+        };
     
     fetchUser();
-  }, [userId, navigate]);
+  }, [userId, token, navigate]);
 
   const referralLink = user 
     ? `${window.location.origin}/cadastro?ref=${user.id}`

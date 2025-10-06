@@ -73,8 +73,9 @@ const Cadastro = () => {
     try {
       const response = await axios.post(`${API_BASE_URL}/api/usuarios/cadastro`, payload);
       
-      const newUserId = response.data.id; 
-      localStorage.setItem('userId', newUserId); 
+      const { id, token } = response.data; 
+      localStorage.setItem('userId', id); 
+      localStorage.setItem('token', token);
       
       alert('Cadastro realizado com sucesso! Você ganhou acesso ao seu perfil.');
       navigate('/perfil'); 
