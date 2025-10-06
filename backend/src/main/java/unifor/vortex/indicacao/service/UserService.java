@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import unifor.vortex.indicacao.dto.UserCadastroDTO;
+import unifor.vortex.indicacao.dto.UserResponseDTO;
 import unifor.vortex.indicacao.model.UserModel;
 import unifor.vortex.indicacao.repository.UserRepository;
 
@@ -15,18 +16,24 @@ import java.util.Optional;
 public class UserService {
 
     private final UserRepository userRepository;
-    private final PasswordEncoder passwordEncoder; // Injeção do Encoder
+    private final PasswordEncoder passwordEncoder;
+    private final JwtService jwtService;
 
-    public UserService(UserRepository userRepository, PasswordEncoder passwordEncoder) {
+    public UserService(UserRepository userRepository, PasswordEncoder passwordEncoder, JwtService jwtService) {
         this.userRepository = userRepository;
         this.passwordEncoder = passwordEncoder;
+        this.jwtService = jwtService;
     }
 
     @Transactional
-    public UserModel cadastrar (UserCadastroDTO dto){
+    public UserResponseDTO cadastrar (UserCadastroDTO dto){
         if (userRepository.findByEmail(dto.email()).isPresent()) {
             throw new IllegalArgumentException("E-mail já cadastrado.");
         }
+
+        UserModel novoUser = new UserModel(dto.nome(), dto.email(), (passwordEncoder.encode(dto.senha())));
+
+        UserModel usuarioSalvo = userRepository.save(novoUser);
 
         if (dto.idReferencia() != null){
             Optional<UserModel> indicadorOpt = userRepository.findById(dto.idReferencia());
@@ -37,10 +44,9 @@ public class UserService {
                 userRepository.save(indicador);
             }
         }
+        String token = jwtService.generateToken(usuarioSalvo.getId(), usuarioSalvo.getEmail());
 
-        UserModel novoUser = new UserModel(dto.nome(),dto.email(), passwordEncoder.encode(dto.senha()));
-
-        return userRepository.save(novoUser);
+        return UserResponseDTO.fromEntityWithToken(usuarioSalvo, token);
     }
 
     public UserModel autenticar (String email, String senha){

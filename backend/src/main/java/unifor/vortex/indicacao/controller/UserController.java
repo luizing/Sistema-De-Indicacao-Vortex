@@ -21,9 +21,9 @@ public class UserController {
 
     @PostMapping("/cadastro")
     public ResponseEntity<UserResponseDTO> cadastrarUsuario(@RequestBody UserCadastroDTO cadastroDTO){
-        UserModel novoUser = userService.cadastrar(cadastroDTO);
+        UserResponseDTO novoUser = userService.cadastrar(cadastroDTO);
 
-        return new ResponseEntity<>(UserResponseDTO.fromEntity(novoUser), HttpStatus.CREATED);
+        return new ResponseEntity<>(novoUser, HttpStatus.CREATED);
     }
 
     @PostMapping("/login")
