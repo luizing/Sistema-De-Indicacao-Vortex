@@ -30,7 +30,7 @@ public class UserModel {
     public UserModel(String nome, String email, String senha){
         this.nome = nome;
         this.email = email;
-        this.senhaHash = senha; //implementar sistema de Hash
+        this.senhaHash = senha;
         this.pontuacao = 0;
     }
 

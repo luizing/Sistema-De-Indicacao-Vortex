@@ -1,7 +1,9 @@
 package unifor.vortex.indicacao.service;
 
+import jakarta.transaction.Transactional;
 import org.apache.catalina.User;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import unifor.vortex.indicacao.dto.UserCadastroDTO;
 import unifor.vortex.indicacao.model.UserModel;
@@ -12,8 +14,13 @@ import java.util.Optional;
 @Service
 public class UserService {
 
-    @Autowired
-    private UserRepository userRepository;
+    private final UserRepository userRepository;
+    private final PasswordEncoder passwordEncoder; // Injeção do Encoder
+
+    public UserService(UserRepository userRepository, PasswordEncoder passwordEncoder) {
+        this.userRepository = userRepository;
+        this.passwordEncoder = passwordEncoder;
+    }
 
     @Transactional
     public UserModel cadastrar (UserCadastroDTO dto){
@@ -31,7 +38,7 @@ public class UserService {
             }
         }
 
-        UserModel novoUser = new UserModel(dto.nome(),dto.email(), dto.senha());
+        UserModel novoUser = new UserModel(dto.nome(),dto.email(), passwordEncoder.encode(dto.senha()));
 
         return userRepository.save(novoUser);
     }
