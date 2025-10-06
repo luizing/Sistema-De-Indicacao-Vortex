@@ -100,9 +100,11 @@ const Cadastro = () => {
         <h2>Crie sua conta</h2>
         <p className="subtitle">Cadastre-se para ganhar seu link de indicação!</p>
 
-        <div className="referral-info">
-          Você está se cadastrando através de um convite.
-        </div>
+        {idReferencia && (
+            <div className="referral-info">
+                Você está se cadastrando através de um convite.
+            </div>
+        )}
         
         <form className="cadastro-form" onSubmit={handleSubmit}>
           <div className="input-group">
