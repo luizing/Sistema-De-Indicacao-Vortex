@@ -81,7 +81,7 @@ O projeto implementa as seguintes funcionalidades, conforme solicitado:
 
     ```bash
     cd backend
-    ./mvnw spring-boot:run 
+    ./mvnw spring-boot:run -D"spring.profiles.active=local"
     ```
 
 ### 3.2. Configuração e Inicialização do Frontend (React)
