@@ -89,11 +89,22 @@ const Cadastro = () => {
       navigate('/perfil'); 
 
     } catch (error) {
-      if (error.response && error.response.data) {
-        setApiError(error.response.data.message || error.response.data);
+        let errorMessage = 'Ocorreu um erro desconhecido.';
+        if (error.response && error.response.data) {
+          if (typeof error.response.data === 'object' && error.response.data.message) {
+              errorMessage = error.response.data.message;
+          } else if (typeof error.response.data === 'string') {
+              errorMessage = error.response.data;
+          } else {
+              errorMessage = 'Erro no servidor: Verifique o console para mais detalhes.';
+          }
       } else {
-        setApiError('Não foi possível conectar ao servidor da API. Verifique se o backend está rodando.');
+          errorMessage = 'Não foi possível conectar ao servidor da API. Verifique se o backend está rodando.';
       }
+
+      alert('Falha no Cadastro:\n\n' + errorMessage);
+      
+      setApiError(errorMessage); 
       console.error('Erro de Cadastro:', error);
     } finally {
       setLoading(false);
