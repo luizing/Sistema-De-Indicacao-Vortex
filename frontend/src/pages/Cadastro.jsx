@@ -37,22 +37,30 @@ const Cadastro = () => {
   };
 
   const validate = () => {
-    let newErrors = {};
+    let errorMessages = [];
+    let isValid = true;
 
     if (!formData.nome) {
-        newErrors.nome = 'O nome é obrigatório.';
+        errorMessages.push('• O nome é obrigatório.');
+        isValid = false;
     }
     
     if (!EMAIL_REGEX.test(formData.email)) {
-        newErrors.email = 'O e-mail precisa ter um formato válido.';
+        errorMessages.push('• O e-mail precisa ter um formato válido.');
+        isValid = false;
     }
 
     if (!PASSWORD_REGEX.test(formData.senha)) {
-        newErrors.senha = 'Mínimo 8 caracteres, contendo letras e números.';
+        errorMessages.push('• Senha deve ter no mínimo 8 caracteres, contendo letras e números.');
+        isValid = false;
     }
 
-    setErrors(newErrors);
-    return Object.keys(newErrors).length === 0;
+    if (!isValid) {
+            alert('Atenção, verifique os seguintes erros:\n\n' + errorMessages.join('\n'));
+        }
+
+    setErrors({});
+    return isValid;
   };
 
   const handleSubmit = async (e) => {
