@@ -67,13 +67,9 @@ O projeto implementa as seguintes funcionalidades, conforme solicitado:
     Crie o arquivo **`backend/src/main/resources/application-local.properties`** e defina suas credenciais, garantindo que elas correspondam aos valores do `docker-compose.yml` (`mysqlDB` e `mysqlPW`).
 
     ```properties
-    # backend/src/main/resources/application-local.properties
-    spring.profiles.active=local
-    spring.datasource.url=jdbc:mysql://localhost:3306/mysqlDB?useSSL=false&serverTimezone=UTC&allowPublicKeyRetrieval=true
-    spring.datasource.username=root
-    spring.datasource.password=mysqlPW 
-    jwt.secret=sua_chave_secreta_de_desenvolvimento_longa_e_unica
-    app.cors.allowed-origin=http://localhost:5173
+      spring.datasource.url=jdbc:mysql://localhost:3306/mysqlDB?useSSL=false&serverTimezone=UTC&allowPublicKeyRetrieval=true
+      spring.datasource.username=root
+      spring.datasource.password=mysqlPW
     ```
 
 3.  **Iniciar a API Spring Boot:**
