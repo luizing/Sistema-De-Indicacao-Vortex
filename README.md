@@ -120,4 +120,4 @@ Ferramentas assistentes de IA (como Gemini/Code Assistants) foram utilizadas par
 * Configuração do MySQL via Docker.
 * Diagnóstico e correção de problemas diversos.
 * Code Review de todo o projeto.
-* Escrita desse readme!.md
+* Escrita desse readme.md
